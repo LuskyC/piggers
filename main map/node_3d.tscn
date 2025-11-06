@@ -54,6 +54,8 @@ use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.46000212, 0, 0, 0, 1, -0.55212414, 0.08150518, -1.7970293)
+use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 0.46000212, 0, 0, 0, 1, 0.735047, 0.08150518, -1.7970293)
+use_collision = true
