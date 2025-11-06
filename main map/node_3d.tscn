@@ -1,3 +1,59 @@
-[gd_scene format=3 uid="uid://bayo2kt0i2ksk"]
+[gd_scene load_steps=7 format=3 uid="uid://bayo2kt0i2ksk"]
 
-[node name="Node3D" type="Node3D"]
+[ext_resource type="Script" uid="uid://byhgoubrplhhw" path="res://main map/pig.gd" id="1_2f5wm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hh2nm"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_2f5wm"]
+sky_material = SubResource("ProceduralSkyMaterial_hh2nm")
+
+[sub_resource type="Environment" id="Environment_jd347"]
+background_mode = 2
+sky = SubResource("Sky_2f5wm")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hh2nm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hh2nm"]
+
+[node name="main" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_jd347")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, -0.9490082, 0.3152516, 0, -0.3152516, -0.9490082, -1.2319555, 2.5067906, -5.711126)
+
+[node name="Camera" type="Node3D" parent="."]
+
+[node name="pig" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58961636, 0)
+script = ExtResource("1_2f5wm")
+
+[node name="PigMesh" type="MeshInstance3D" parent="pig"]
+transform = Transform3D(0.32592067, 0, 0, 0, 0.28539836, 0, 0, 0, 0.26299492, 0, -0.24156678, 0)
+mesh = SubResource("CapsuleMesh_hh2nm")
+
+[node name="PigCollisionShape" type="CollisionShape3D" parent="pig"]
+transform = Transform3D(0.32907933, 0, 0, 0, 0.29406664, 0, 0, 0, 0.2905977, 0, -0.20049316, -0.012955964)
+shape = SubResource("CapsuleShape3D_hh2nm")
+
+[node name="Camera3D" type="Camera3D" parent="pig"]
+transform = Transform3D(1, 0, 0, 0, 0.9951075, 0.09879875, 0, -0.09879875, 0.9951075, -0.031161875, -0.06656706, -0.045761704)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(8.28603, 0, 0, 0, 0.096360475, 0, 0, 0, 10.50726, -0.18957716, -0.22565594, 0)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.46000212, 0, 0, 0, 1, -0.55212414, 0.08150518, -1.7970293)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.46000212, 0, 0, 0, 1, 0.735047, 0.08150518, -1.7970293)
