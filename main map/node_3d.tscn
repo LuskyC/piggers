@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bayo2kt0i2ksk"]
 
-[ext_resource type="Script" uid="uid://byhgoubrplhhw" path="res://Scripts/pig.gd" id="1_2f5wm"]
-[ext_resource type="Script" uid="uid://cm1l7i7fw73h5" path="res://Scripts/camera_3d.gd" id="2_jd347"]
+[ext_resource type="Script" uid="uid://byhgoubrplhhw" path="res://scripts/pig.gd" id="1_2f5wm"]
+[ext_resource type="Script" uid="uid://cm1l7i7fw73h5" path="res://scripts/camera_3d.gd" id="2_jd347"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hh2nm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -44,8 +44,10 @@ mesh = SubResource("CapsuleMesh_hh2nm")
 transform = Transform3D(0.32907933, 0, 0, 0, 0.29406664, 0, 0, 0, 0.2905977, 0, -0.20049316, -0.012955964)
 shape = SubResource("CapsuleShape3D_hh2nm")
 
-[node name="Camera3D" type="Camera3D" parent="pig"]
-transform = Transform3D(1, 0, 0, 0, 0.8964864, -0.4430712, 0, 0.4430712, 0.8964864, -0.031161875, -0.06656706, -0.045761704)
+[node name="head" type="Node3D" parent="pig"]
+
+[node name="Camera3D" type="Camera3D" parent="pig/head"]
+transform = Transform3D(1, 0, 0, 0, 0.89648646, -0.44307122, 0, 0.44307122, 0.89648646, -0.031161875, -0.06656706, -0.045761704)
 script = ExtResource("2_jd347")
 
 [node name="Environment" type="Node3D" parent="."]
