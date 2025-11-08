@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bayo2kt0i2ksk"]
+[gd_scene load_steps=9 format=3 uid="uid://bayo2kt0i2ksk"]
 
 [ext_resource type="Script" uid="uid://byhgoubrplhhw" path="res://Scripts/pig.gd" id="1_2f5wm"]
+[ext_resource type="PackedScene" uid="uid://5p8b3qgqh6af" path="res://models/pigger.glb" id="2_0dxtp"]
 [ext_resource type="Script" uid="uid://cm1l7i7fw73h5" path="res://Scripts/camera_3d.gd" id="2_jd347"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hh2nm"]
@@ -33,12 +34,15 @@ transform = Transform3D(1, 0, 0, 0, -0.9490082, 0.3152516, 0, -0.3152516, -0.949
 [node name="Camera" type="Node3D" parent="."]
 
 [node name="pig" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58961636, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5865188, 0)
 script = ExtResource("1_2f5wm")
 
 [node name="PigMesh" type="MeshInstance3D" parent="pig"]
 transform = Transform3D(0.32592067, 0, 0, 0, 0.28539836, 0, 0, 0, 0.26299492, 0, -0.24156678, 0)
 mesh = SubResource("CapsuleMesh_hh2nm")
+
+[node name="pigger" parent="pig/PigMesh" instance=ExtResource("2_0dxtp")]
+transform = Transform3D(-0.9999994, 0.0012041446, 0, -0.0012041867, -0.9999993, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="PigCollisionShape" type="CollisionShape3D" parent="pig"]
 transform = Transform3D(0.32907933, 0, 0, 0, 0.29406664, 0, 0, 0, 0.2905977, 0, -0.20049316, -0.012955964)
