@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="piggers"
-run/main_scene="uid://bayo2kt0i2ksk"
+run/main_scene="uid://cggrc7eb8asel"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [editor_plugins]
