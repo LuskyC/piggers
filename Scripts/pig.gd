@@ -1,14 +1,15 @@
 extends CharacterBody3D
+class_name Pig
 
 var sens = 0.1
-var speed = 4
+var speed = 1
 var jump = 6
 var accel = 8
 var _delta
-
+var counter = 0
 var direction = Vector2()
 var vel = Vector3()
-
+@export var coeff = 50
 var gravity = -22
 var max_gravity = -30
 
@@ -82,3 +83,20 @@ func dir():
 	# Сбрасываем Y скорость при нахождении на полу
 	if is_on_floor() and vel.y < 0:
 		vel.y = 0
+
+
+func _on_oat_detector_area_entered(area):
+	var parent = area.get_parent()
+	if parent.get("Class"):
+		if parent.get("Class") == "Oat":
+			parent.queue_free()
+			self.counter += 10
+			self.increase_size(self.counter)
+			print(self.counter)
+	
+func increase_size(counter):
+	self.scale = Vector3(1 + (counter/self.coeff), 1 + (counter/self.coeff), 1+(counter/self.coeff))
+	print(self.global_position.y)
+	self.global_position.y += (self.global_position.y *  (counter/self.coeff))
+	print(self.global_position.y) 	
+	self.speed += self.speed * (counter/self.coeff)

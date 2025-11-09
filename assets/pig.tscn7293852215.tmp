@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dl42j7uhugw8h"]
+
+[ext_resource type="Script" uid="uid://byhgoubrplhhw" path="res://Scripts/pig.gd" id="1_vni1d"]
+[ext_resource type="Script" uid="uid://cm1l7i7fw73h5" path="res://Scripts/camera_3d.gd" id="2_qgr0v"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nqsne"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rnkc2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vni1d"]
+size = Vector3(0.6437988, 0.62457275, 0.79589844)
+
+[node name="pig" type="CharacterBody3D"]
+script = ExtResource("1_vni1d")
+
+[node name="PigCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, -0.20049316, -0.012955964)
+shape = SubResource("CapsuleShape3D_nqsne")
+
+[node name="PigMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.32592067, 0, 0, 0, 0.28539836, 0, 0, 0, 0.26299492, 0, -0.24156678, 0)
+mesh = SubResource("CapsuleMesh_rnkc2")
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 0.89648646, -0.44307122, 0, 0.44307122, 0.89648646, -0.031161875, -0.06656706, -0.045761704)
+script = ExtResource("2_qgr0v")
+
+[node name="OatDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4901161e-08, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OatDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013549805, -0.18380737, -0.092285156)
+shape = SubResource("BoxShape3D_vni1d")
+
+[connection signal="area_entered" from="OatDetector" to="." method="_on_oat_detector_area_entered"]

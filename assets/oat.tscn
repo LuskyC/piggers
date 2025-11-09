@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl0367es7leac"]
+
+[ext_resource type="PackedScene" uid="uid://cq4uw7u1b674a" path="res://models/oat.glb" id="1_2lxxq"]
+[ext_resource type="Script" uid="uid://2vfd1psc2cj8" path="res://assets/oat.gd" id="1_ixfsq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3wc27"]
+size = Vector3(2.4604416, 4.0195313, 2.2487793)
+
+[node name="oat" type="Node3D"]
+script = ExtResource("1_ixfsq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="oat" parent="MeshInstance3D" instance=ExtResource("1_2lxxq")]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.027965546, -0.33496094, 0.0076904297)
+shape = SubResource("BoxShape3D_3wc27")

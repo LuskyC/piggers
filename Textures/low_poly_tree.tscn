@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmldoesbx14ej"]
+
+[ext_resource type="PackedScene" uid="uid://csx2r0xp3uhep" path="res://assets/low_poly_tree.fbx" id="1_d48tm"]
+[ext_resource type="ArrayMesh" uid="uid://dauhs22egibtq" path="res://Textures/new_array_mesh.tres" id="2_veis3"]
+
+[node name="low_poly_tree" instance=ExtResource("1_d48tm")]
+
+[node name="bark" parent="." index="0"]
+mesh = ExtResource("2_veis3")
