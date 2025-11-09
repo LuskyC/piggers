@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://dps5kufm3o7l"]
+
+[ext_resource type="Script" uid="uid://gxygj02ay1o8" path="res://PauseMenu/pause_menu.gd" id="1_tobvk"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tobvk")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -241.5
+offset_top = -239.0
+offset_right = 241.5
+offset_bottom = 278.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 77
+text = "PAUSED"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="resume" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 55
+text = "resume"
+flat = true
+icon_alignment = 1
+
+[node name="multiplayer" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 55
+text = "multiplayer"
+flat = true
+icon_alignment = 1
+
+[node name="quit" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 55
+text = "quit"
+flat = true
+icon_alignment = 1
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/multiplayer" to="." method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]

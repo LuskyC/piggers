@@ -19,6 +19,10 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event: InputEvent) -> void:
+	# Если мышка не захвачена - не обрабатываем движение мыши
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		return
+		
 	if event is InputEventMouseMotion:
 		var movement = event.relative
 		
@@ -28,14 +32,6 @@ func _input(event: InputEvent) -> void:
 		
 		# Поворот всего тела влево/вправо
 		rotation.y += -deg_to_rad(movement.x * sens)
-		
-	# Выход из захвата мыши по Escape
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_ESCAPE:
-			if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			else:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
 	_delta = delta
@@ -44,43 +40,41 @@ func _physics_process(delta: float) -> void:
 func dir():
 	direction = Vector2(0,0)
 	
-	# ИСПРАВЛЕНО: используем is_action_pressed для непрерывного движения
-	if Input.is_action_pressed('ui_up'): 
-		direction.y += 1
-	if Input.is_action_pressed('ui_down'):
-		direction.y -= 1
-	if Input.is_action_pressed('ui_right'):
-		direction.x += 1
-	if Input.is_action_pressed('ui_left'):
-		direction.x -= 1
+	# УБРАЛИ проверку мышки здесь - физика работает всегда
 	
-	# Нормализуем и поворачиваем направление относительно вращения персонажа
+	# Но управление клавишами работает только когда мышка захвачена
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		if Input.is_action_pressed('ui_up'): 
+			direction.y += 1
+		if Input.is_action_pressed('ui_down'):
+			direction.y -= 1
+		if Input.is_action_pressed('ui_right'):
+			direction.x += 1
+		if Input.is_action_pressed('ui_left'):
+			direction.x -= 1
+	
 	direction = direction.normalized()
 	
-	# Преобразуем локальное направление в мировые координаты
 	var forward = -transform.basis.z
 	var right = transform.basis.x
 	
 	var move_direction = forward * direction.y + right * direction.x
 	
-	# Применяем движение с интерполяцией
 	vel.x = lerp(vel.x, move_direction.x * speed, accel * _delta)
 	vel.z = lerp(vel.z, move_direction.z * speed, accel * _delta)
 	
-	# Гравитация
+	# Гравитация работает ВСЕГДА
 	vel.y += gravity * _delta
 	if vel.y < max_gravity:
 		vel.y = max_gravity
 	
-	# Прыжок
-	if Input.is_action_just_pressed('jump') and is_on_floor():
+	# Прыжок работает только когда управление активно
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and Input.is_action_just_pressed('jump') and is_on_floor():
 		vel.y = jump
 	
-	# Устанавливаем скорость и двигаем
 	velocity = vel
 	move_and_slide()
 	
-	# Сбрасываем Y скорость при нахождении на полу
 	if is_on_floor() and vel.y < 0:
 		vel.y = 0
 
