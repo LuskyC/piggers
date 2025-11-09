@@ -14,6 +14,10 @@ config/name="piggers"
 run/main_scene="uid://bayo2kt0i2ksk"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
+
 [input]
 
 ui_left={
